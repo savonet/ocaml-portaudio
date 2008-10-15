@@ -1,0 +1,32 @@
+ocaml-faad
+==========
+
+This package contains an O'Caml interface for the portable audio I/O library.
+
+Please read the COPYING file before using this software.
+
+Prerequisites:
+==============
+
+- ocaml >= 3.0.6 (haven't tried earlier versions)
+
+- portaudio >= 19 (haven't tried earlier versions)
+
+- findlib >= 0.8.1 (haven't tried earlier versions)
+
+Compilation:
+============
+
+	$ make all
+
+This should build both the native and the byte-code version of the
+extension library.
+
+Installation:
+=============
+
+	$ make install
+
+This should install the library file (using ocamlfind) in the
+appropriate place.
+

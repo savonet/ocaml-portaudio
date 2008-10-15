@@ -1,0 +1,12 @@
+0.1.2 (16-04-2008)
+=====
+* More portable make invokation
+* Install .cmx file
+
+0.1.1 (19-11-2007)
+=====
+* Changed licence to LGPL+link exception
+
+0.1.0 (17-10-2007)
+=====
+* Initial release
