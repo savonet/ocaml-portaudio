@@ -33,6 +33,7 @@ CLIBS = $(ACLIBS:-l%=%)
 CC = @CC@
 CFLAGS = @CFLAGS@ @portaudio_CFLAGS@ -Wall -DCAML_NAME_SPACE
 CPPFLAGS = @CPPFLAGS@
+NO_CUSTOM = yes
 
 
 all: $(BEST)
