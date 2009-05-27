@@ -2,6 +2,8 @@
 =====
 * Added NO_CUSTOM to build
   in standard mode.
+* Added prefix to main compilation variables
+  if passed to configure.
 * Makefile now honnors LIBDIRS
   variable for linking against libraries
   located in other places than then standard

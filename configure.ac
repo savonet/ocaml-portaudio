@@ -5,6 +5,14 @@ AC_INIT(ocaml-portaudio, 0.1.2, savonet-users@lists.sourceforge.net)
 VERSION=$PACKAGE_VERSION
 AC_MSG_RESULT([configuring $PACKAGE_STRING])
 
+# Add prefix to compilation variables
+# if passed
+if test "x$prefix" != "xNONE"; then
+	CFLAGS="$CFLAGS -I$prefix/include"
+	LDFLAGS="$LDFLAGS -L$prefix/lib"
+	CPPFLAGS="$CPPFLAGS -I$prefix/include"
+fi
+
 OCAMLFIND_LDCONF=""
 AC_ARG_ENABLE([ldconf], AC_HELP_STRING([--disable-ldconf],[don't modify the dynamic loader configuration file (default is enable)]),[ac_enable_ldconf=$enableval],[ac_enable_ldconf=$enableval],[ac_enable_ldconf=yes])
 if test "$ac_enable_ldconf" = no ; then
