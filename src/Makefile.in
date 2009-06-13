@@ -43,6 +43,8 @@ byte: byte-code-library
 
 opt: native-code-library
 
+native-code-library: byte-code-library
+
 install: libinstall
 
 uninstall: libuninstall
