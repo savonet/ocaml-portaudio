@@ -91,6 +91,15 @@ fi
 
 AC_PATH_PROG(OCAMLDOC,ocamldoc,no)
 
+AC_ARG_ENABLE([debugging],
+   AC_HELP_STRING(
+      [--enable-debugging],
+      [compile with debugging information (backtrace printing in particular)]))
+
+if test "x$enable_debugging" = "xyes" ; then
+  OCAMLFLAGS="$OCAMLFLAGS -g"
+fi
+
 AC_PATH_PROG(OCAMLFIND,ocamlfind,no)
 if test "$OCAMLFIND" = no ; then
 	AC_MSG_ERROR(Cannot find ocamlfind.)
@@ -122,6 +131,7 @@ fi
 AC_SUBST(VERSION)
 AC_SUBST(OCAMLC)
 AC_SUBST(OCAMLOPT)
+AC_SUBST(OCAMLFLAGS)
 AC_SUBST(OCAMLDEP)
 AC_SUBST(OCAMLBEST)
 AC_SUBST(OCAMLVERSION)
