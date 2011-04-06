@@ -2,7 +2,7 @@
 
 PROGNAME := ocaml-portaudio
 DISTFILES := CHANGES COPYING Makefile.in README \
-	bootstrap configure configure.ac \
+	bootstrap configure configure.ac m4/*.m4 \
 	src/*.mli src/*.ml src/*.c src/Makefile.in src/META.in \
 	src/OCamlMakefile \
 	examples/*.ml examples/Makefile examples/OCamlMakefile
