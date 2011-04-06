@@ -17,6 +17,7 @@ AC_CHECK_OCAML_COMPILERS()
 
 AC_PROG_CC()
 AC_CHECK_TOOL([AR],[ar],no)
+AC_SUBST(AR)
 PKG_PROG_PKG_CONFIG()
 # PKG_CHECK_MODULES loses when you need --libs-only-[lL]
 if ! $PKG_CONFIG --exists portaudio-2.0; then
