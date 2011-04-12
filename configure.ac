@@ -1,6 +1,6 @@
 
 # check for one particular file of the sources 
-AC_INIT(ocaml-portaudio, 0.1.3, savonet-users@lists.sourceforge.net)
+AC_INIT(ocaml-portaudio, 0.2.0, savonet-users@lists.sourceforge.net)
 
 VERSION=$PACKAGE_VERSION
 AC_MSG_RESULT([configuring $PACKAGE_STRING])
@@ -14,6 +14,12 @@ if test "x$prefix" != "xNONE"; then
 fi
 
 AC_CHECK_OCAML_COMPILERS()
+
+if test "x$CAML_THREADS" = "xyes"; then
+  CFLAGS="$CFLAGS -DCAML_THREADS"
+fi
+
+REQUIRES="threads"
 
 AC_PROG_CC()
 AC_CHECK_TOOL([AR],[ar],no)
@@ -33,6 +39,7 @@ AC_SUBST([portaudio_LDFLAGS])
 
 # substitutions to perform
 AC_SUBST(VERSION)
+AC_SUBST(REQUIRES)
 
 # Finally create the Makefile and samples
 AC_CONFIG_FILES([Makefile],[chmod a-w Makefile])

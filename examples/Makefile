@@ -1,7 +1,8 @@
 SOURCES=noise.ml
 RESULT=noise
-LIBS=portaudio
+LIBS=portaudio bigarray
 INCDIRS=../src
+THREADS = yes
 
 all: nc
 

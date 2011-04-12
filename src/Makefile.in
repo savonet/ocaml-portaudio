@@ -27,6 +27,7 @@ OCAMLLIBPATH = @CAMLLIBPATH@
 
 SOURCES = portaudio_stubs.c portaudio.mli portaudio.ml
 RESULT = portaudio
+THREADS = yes
 OCAMLDOCFLAGS = -stars
 LIBINSTALL_FILES = $(wildcard *.mli *.cmi *.cma *.cmxa *.cmx *.a *.so)
 ACLIBS = @LIBS@ @portaudio_LIBS@
