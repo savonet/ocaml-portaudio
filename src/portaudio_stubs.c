@@ -583,7 +583,7 @@ void *get_read_buffer(int fmt, int chans, int len)
                 store(bufc, ofs + i, elem(buf[get_index(fmt, chans, len, c, i)])); \
         }
 
-void copy_buffer(void *inbuf, int fmt, int chans, int ofs, int len, value _buf)
+void ocaml_portaudio_copy_buffer(void *inbuf, int fmt, int chans, int ofs, int len, value _buf)
 {
     int c, i;
     if(fmt & paFloat32)
@@ -643,7 +643,7 @@ CAMLprim value ocaml_pa_read_stream(value _stream, value _buf, value _ofs, value
   ret = Pa_ReadStream(stream, buf, len);
   caml_leave_blocking_section();
 
-  copy_buffer(buf, format, chans, ofs, len, _buf);
+  ocaml_portaudio_copy_buffer(buf, format, chans, ofs, len, _buf);
 
   free(buf);
   cerr(ret);
