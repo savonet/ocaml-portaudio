@@ -25,17 +25,7 @@ AC_PROG_CC()
 AC_CHECK_TOOL([AR],[ar],no)
 AC_SUBST(AR)
 PKG_PROG_PKG_CONFIG()
-# PKG_CHECK_MODULES loses when you need --libs-only-[lL]
-if ! $PKG_CONFIG --exists portaudio-2.0; then
-        AC_MSG_ERROR([libportaudio not found])
-fi
-portaudio_CFLAGS=`$PKG_CONFIG --cflags portaudio-2.0`
-AC_SUBST([portaudio_CFLAGS])
-portaudio_LIBS=`$PKG_CONFIG --libs-only-l portaudio-2.0`
-AC_SUBST([portaudio_LIBS])
-portaudio_LDFLAGS=`$PKG_CONFIG --libs-only-L portaudio-2.0`
-AC_SUBST([portaudio_LDFLAGS])
-
+PKG_CONFIG_CHECK_MODULE([portaudio-2.0])
 
 # substitutions to perform
 AC_SUBST(VERSION)
