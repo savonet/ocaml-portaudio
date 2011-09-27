@@ -1,7 +1,1 @@
-#!/bin/sh
-
-aclocal -I m4
-# Doing this only once sometimes yield an error message (AC_MSG_ERROR 
-# undefined).. I give up understanding that.
-autoconf
-autoconf
+../autoconf/bootstrap
