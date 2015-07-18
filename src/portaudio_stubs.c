@@ -46,6 +46,7 @@
 #include <caml/threads.h>
 #endif
 
+#include <stdint.h>
 #include <string.h>
 #include <assert.h>
 
@@ -520,9 +521,9 @@ void *get_buffer(int fmt, int chans, int ofs, int len, value buf)
     else if(fmt & paInt32 || fmt & paInt24)
     {
         if(fmt & paNonInterleaved)
-            GET_BUFFER_NI(int32, Int32_val(Field(bufc, ofs + i)))
+            GET_BUFFER_NI(int32_t, Int32_val(Field(bufc, ofs + i)))
         else
-            GET_BUFFER(int32, Int32_val(Field(bufc, ofs + i)))
+            GET_BUFFER(int32_t, Int32_val(Field(bufc, ofs + i)))
     }
     else if(fmt & paInt16)
     {
@@ -551,7 +552,7 @@ void *get_read_buffer(int fmt, int chans, int len)
     }
     else if(fmt & paInt32 || fmt & paInt24)
     {
-        size = sizeof(int32);
+        size = sizeof(int32_t);
     }
     else if(fmt & paInt16)
     {
@@ -592,7 +593,7 @@ void ocaml_portaudio_copy_buffer(void *inbuf, int fmt, int chans, int ofs, int l
     }
     else if(fmt & paInt32 || fmt & paInt24)
     {
-        COPY_BUFFER(int32, Store_field, caml_copy_int32)
+        COPY_BUFFER(int32_t, Store_field, caml_copy_int32)
     }
     else if(fmt & paInt16)
     {
@@ -662,7 +663,7 @@ void *get_buffer_ba(int fmt, int chans, int ofs, value buf)
     }
     else if(fmt & paInt32 || fmt & paInt24)
     {
-        int32 *bufi = Caml_ba_data_val(buf);
+        int32_t *bufi = Caml_ba_data_val(buf);
         return bufi + chans*ofs;
     }
     else if(fmt & paInt16)
@@ -700,7 +701,7 @@ void *get_buffer_ba_ni(int fmt, int chans, int ofs, value buf)
     }
     else if(fmt & paInt32 || fmt & paInt24)
     {
-        GET_BUFFER_BA(int32)
+        GET_BUFFER_BA(int32_t)
     }
     else if(fmt & paInt16)
     {

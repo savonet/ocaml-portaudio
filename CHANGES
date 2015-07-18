@@ -1,3 +1,7 @@
+0.2.1 ()
+=====
+* Switch to standard int32_t type.
+
 0.2.0 (02-07-2011)
 =====
 Changes contributed by Niki Yoshiuchi:
