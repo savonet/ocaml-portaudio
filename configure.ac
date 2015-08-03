@@ -1,6 +1,6 @@
 
 # check for one particular file of the sources 
-AC_INIT([ocaml-portaudio],[0.2.0],[savonet-users@lists.sourceforge.net])
+AC_INIT([ocaml-portaudio],[0.2.1],[savonet-users@lists.sourceforge.net])
 
 VERSION=$PACKAGE_VERSION
 AC_MSG_RESULT([configuring $PACKAGE_STRING])
