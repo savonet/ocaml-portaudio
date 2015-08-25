@@ -1,0 +1,9 @@
+language: c
+addons:
+  apt:
+    packages:
+    - ocaml-nox
+    - ocaml-findlib
+    - libportaudio-dev
+
+script: ./bootstrap && ./configure && make
