@@ -4,6 +4,6 @@ addons:
     packages:
     - ocaml-nox
     - ocaml-findlib
-    - libportaudio-dev
+    - portaudio19-dev
 
 script: ./bootstrap && ./configure && make
