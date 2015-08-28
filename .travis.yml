@@ -7,4 +7,4 @@ addons:
     - ocaml-findlib
     - portaudio19-dev
 
-script: ./bootstrap && ./configure && make
+script: ./bootstrap && ./configure && make && make -C examples
