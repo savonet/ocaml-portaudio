@@ -1,18 +1,22 @@
 opam-version: "2.0"
-version: "dev"
+name: "portaudio"
+version: "0.2.1"
 maintainer: "Romain Beauxis <toots@rastageeks.org>"
 authors: "The Savonet Team <savonet-users@lists.sourceforge.net>"
 homepage: "https://github.com/savonet/ocaml-portaudio"
 build: [
-  ["./bootstrap"]
+  ["./bootstrap"] {pinned}
   ["./configure" "--prefix" prefix]
+  [make "clean"] {pinned}
   [make]
 ]
 install: [
   [make "install"]
 ]
-remove: ["ocamlfind" "remove" "portaudio"]
-depends: ["ocaml" "ocamlfind"]
+depends: [
+  "ocaml"
+  "ocamlfind" {build}
+]
 depexts: [
   ["portaudio-dev"] {os-distribution = "alpine"}
   ["portaudio"] {os = "macos" & os-distribution = "homebrew"}
@@ -23,9 +27,3 @@ bug-reports: "https://github.com/savonet/ocaml-portaudio/issues"
 dev-repo: "git+https://github.com/savonet/ocaml-portaudio.git"
 synopsis:
   "Bindings for the portaudio library which provides high-level functions for using soundcards"
-flags: light-uninstall
-url {
-  src:
-    "https://github.com/savonet/ocaml-portaudio/releases/download/0.2.1/ocaml-portaudio-0.2.1.tar.gz"
-  checksum: "md5=c504a0d47c1aa834b774b9c668b65691"
-}
