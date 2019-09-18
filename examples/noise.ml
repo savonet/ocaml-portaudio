@@ -10,9 +10,18 @@ let choose_device () =
   done;
   read_int ()
 
+let formats = [|"int8"; "int16"; "int24"; "int32"; "float32"|]
+
+let int_of_format s =
+  let ans = ref (-1) in
+  for i = 0 to Array.length formats - 1 do
+    if s = formats.(i) then ans := i
+  done;
+  if !ans = -1 then raise Not_found;
+  !ans
+
 let choose_format () =
-  let formats = [|"format_int8"; "format_int16"; "format_int24"; "format_int32"; "format_float32"|] in
-  for i = 0 to (Array.length formats) - 1 do
+  for i = 0 to Array.length formats - 1 do
     let s = formats.(i) in
     Printf.printf "%d\t%s\n" i s
   done;
@@ -61,8 +70,7 @@ let test_bigarray stream inter batype randf randv =
     Portaudio.write_stream_ba stream ba 0 256
   done
 
-let start d fmt = 
-  let inter = choose_interleaved () in
+let start inter d fmt =
   match fmt with
   | 0 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int8; latency=1. } in
@@ -147,17 +155,50 @@ let start_callback d fmt =
     close_stream stream
   | _ -> ()
 
+let device = ref None
+let format = ref None
+let callback = ref None
+let interleaved = ref None
+
 let rec main () =
-  let d = choose_device () in
+  let d =
+    match !device with
+    | Some d -> d
+    | None -> choose_device ()
+  in
   if d = -1 then exit 0;
-  let fmt = choose_format () in
-  (match choose_callback () with
-   | 0 -> start d fmt
-   | 1 -> start_callback d fmt
-   | _ -> ());
-  main ()
+  let fmt =
+    match !format with
+    | Some f -> f
+    | None -> choose_format ()
+  in
+  let cb =
+    match !callback with
+    | Some c -> c
+    | None -> choose_callback ()
+  in
+  match cb with
+  | 0 ->
+    let inter =
+      match !interleaved with
+      | Some i -> i
+      | None -> choose_interleaved ()
+    in
+    start inter d fmt
+  | 1 -> start_callback d fmt
+  | _ -> ()
 
 let () =
+  Arg.parse
+    [
+      "--device", Int (fun n -> device := Some n), "Device.";
+      "--format", String (fun s -> format := Some (int_of_format s)), "Format.";
+      "--blocking", Unit (fun () -> callback := Some 0), "Use blocking mode.";
+      "--callback", Unit (fun () -> callback := Some 1), "Use callbacks.";
+      "--interleaved", Unit (fun () -> interleaved := Some true), "Interleaved samples.";
+      "--non-interleaved", Unit (fun () -> interleaved := Some false), "Non-interleaved samples.";
+    ]
+    (fun s -> Printf.eprintf "Ignored argument: %s\n%!" s) "make noise";
   Printf.printf "Using %s.\n%!" (get_version_string ());
   Random.self_init ();
   Portaudio.init ();
