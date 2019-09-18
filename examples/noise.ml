@@ -1,6 +1,8 @@
 open Portaudio
 open Bigarray
 
+let samplerate = ref 44100.
+
 let choose_device () =
   print_endline "-1 Quit";
   let dcount = get_device_count () in
@@ -74,35 +76,35 @@ let start inter d fmt =
   match fmt with
   | 0 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int8; latency=1. } in
-    let stream = open_stream ~interleaved:inter None outparam 11025. 256 [] in
+    let stream = open_stream ~interleaved:inter None outparam !samplerate 256 [] in
     start_stream stream;
     test_array stream 0 Random.int 256;
     test_bigarray stream inter int8_signed Random.int 256;
     close_stream stream
   | 1 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int16; latency=1. } in
-    let stream = open_stream ~interleaved:inter None outparam 11025. 256 [] in
+    let stream = open_stream ~interleaved:inter None outparam !samplerate 256 [] in
     start_stream stream;
     test_array stream 0 Random.int 65536;
     test_bigarray stream inter int16_signed Random.int 65536;
     close_stream stream
   | 2 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int24; latency=1. } in
-    let stream = open_stream ~interleaved:inter None outparam 11025. 256 [] in
+    let stream = open_stream ~interleaved:inter None outparam !samplerate 256 [] in
     start_stream stream;
     test_array stream Int32.zero Random.int32 (Int32.of_int (4096*4096));
     test_bigarray stream inter int32 Random.int32 (Int32.of_int (4096*4096));
     close_stream stream
   | 3 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int32; latency=1. } in
-    let stream = open_stream ~interleaved:inter None outparam 11025. 256 [] in
+    let stream = open_stream ~interleaved:inter None outparam !samplerate 256 [] in
     start_stream stream;
     test_array stream Int32.zero Random.int32 Int32.max_int;
     test_bigarray stream inter int32 Random.int32 Int32.max_int;
     close_stream stream
   | 4 ->
     let outparam = Some { channels=2; device=d; sample_format=format_float32; latency=1. } in
-    let stream = open_stream ~interleaved:inter None outparam 11025. 256 [] in
+    let stream = open_stream ~interleaved:inter None outparam !samplerate 256 [] in
     start_stream stream;
     test_array stream 0. (fun () -> 1. -. (Random.float 2.)) ();
     test_bigarray stream inter float32 (fun () -> 1. -. (Random.float 2.)) ();
@@ -121,35 +123,35 @@ let start_callback d fmt =
   | 0 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int8; latency=1. } in
     let r () = Random.int 256 in
-    let stream = open_stream ~callback:(cb r) None outparam 11025. 0 [] in
+    let stream = open_stream ~callback:(cb r) None outparam !samplerate 0 [] in
     start_stream stream;
     sleep 5000;
     close_stream stream
   | 1 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int16; latency=1. } in
     let r () = Random.int 65536 in
-    let stream = open_stream ~callback:(cb r) None outparam 11025. 0 [] in
+    let stream = open_stream ~callback:(cb r) None outparam !samplerate 0 [] in
     start_stream stream;
     sleep 5000;
     close_stream stream
   | 2 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int24; latency=1. } in
     let r () = Random.int32 (Int32.of_int (4096*4096)) in
-    let stream = open_stream ~callback:(cb r) None outparam 11025. 0 [] in
+    let stream = open_stream ~callback:(cb r) None outparam !samplerate 0 [] in
     start_stream stream;
     sleep 5000;
     close_stream stream
   | 3 ->
     let outparam = Some { channels=2; device=d; sample_format=format_int32; latency=1. } in
     let r () = Random.int32 (Int32.max_int) in
-    let stream = open_stream ~callback:(cb r) None outparam 11025. 0 [] in
+    let stream = open_stream ~callback:(cb r) None outparam !samplerate 0 [] in
     start_stream stream;
     sleep 5000;
     close_stream stream
   | 4 ->
     let outparam = Some { channels=2; device=d; sample_format=format_float32; latency=1. } in
     let r () = 1. -. (Random.float 2.) in
-    let stream = open_stream ~callback:(cb r) None outparam 11025. 0 [] in
+    let stream = open_stream ~callback:(cb r) None outparam !samplerate 0 [] in
     start_stream stream;
     sleep 5000;
     close_stream stream
@@ -197,6 +199,7 @@ let () =
       "--callback", Unit (fun () -> callback := Some 1), "Use callbacks.";
       "--interleaved", Unit (fun () -> interleaved := Some true), "Interleaved samples.";
       "--non-interleaved", Unit (fun () -> interleaved := Some false), "Non-interleaved samples.";
+      "--samplerate", Int (fun f -> samplerate := float f), "Samplerate";
     ]
     (fun s -> Printf.eprintf "Ignored argument: %s\n%!" s) "make noise";
   Printf.printf "Using %s.\n%!" (get_version_string ());
