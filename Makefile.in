@@ -28,4 +28,7 @@ dist:
 	tar zcvf ../$(PROGNAME)-$(VERSION).tar.gz $(PROGNAME)-$(VERSION)
 	rm -rf $(PROGNAME)-$(VERSION)
 
+test:
+	$(MAKE) -C examples test
+
 .PHONY: dist doc
