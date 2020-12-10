@@ -1,6 +1,0 @@
-name = "portaudio"
-version = "@VERSION@"
-description = "OCaml bindings to PortAudio"
-requires = ""
-archive(byte) = "portaudio.cma"
-archive(native) = "portaudio.cmxa"
