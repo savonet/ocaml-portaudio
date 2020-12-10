@@ -10,7 +10,7 @@
 
 (package
  (name portaudio)
- (synopsis "SBindings for the portaudio library which provides high-level functions for using soundcards")
+ (synopsis "Bindings for the portaudio library which provides high-level functions for using soundcards")
  (depends
   conf-portaudio
   conf-pkg-config
