@@ -1,5 +1,5 @@
-ocaml-faad
-==========
+ocaml-portaudio
+===============
 
 This package contains an OCaml interface for the portable audio I/O library.
 
