@@ -228,3 +228,6 @@ val read_stream_ba :
   int ->
   int ->
   unit
+
+val read_stream_available_frames : ('a, 'b, 'c, 'd) stream -> int
+val write_stream_available_frames : ('a, 'b, 'c, 'd) stream -> int

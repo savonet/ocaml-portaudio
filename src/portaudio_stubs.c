@@ -682,3 +682,23 @@ CAMLprim value ocaml_pa_read_stream_ba(value _stream, value _buf, value _ofs,
 
   CAMLreturn(Val_unit);
 }
+
+CAMLprim value ocaml_pa_read_stream_available_frames(value _stream) {
+  CAMLparam1(_stream);
+  PaStream *stream = Stream_val(_stream);
+  int frames_available;
+
+  frames_available = Pa_GetStreamReadAvailable(stream);
+
+  CAMLreturn(Val_int(frames_available));
+}
+
+CAMLprim value ocaml_pa_write_stream_available_frames(value _stream) {
+  CAMLparam1(_stream);
+  PaStream *stream = Stream_val(_stream);
+  int frames_available;
+
+  frames_available = Pa_GetStreamWriteAvailable(stream);
+
+  CAMLreturn(Val_int(frames_available));
+}
