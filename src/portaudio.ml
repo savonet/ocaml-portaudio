@@ -177,3 +177,9 @@ external read_stream_ba :
   int ->
   int ->
   unit = "ocaml_pa_read_stream_ba"
+
+external read_stream_available_frames : ('a, 'b, 'c, 'd) stream -> int
+  = "ocaml_pa_read_stream_available_frames"
+
+external write_stream_available_frames : ('a, 'b, 'c, 'd) stream -> int
+  = "ocaml_pa_write_stream_available_frames"
