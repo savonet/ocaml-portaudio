@@ -1,5 +1,10 @@
+0.2.3 (unreleased)
+=====
+- Added `read_stream_available_frames` and `write_stream_available_frames` (#3).
+
 0.2.2 (10-12-2020)
 ======
+
 - Switch to dune!
 
 0.2.1 (03-08-2015)
