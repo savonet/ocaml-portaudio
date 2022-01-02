@@ -1,4 +1,4 @@
-0.2.3 (unreleased)
+0.2.3 (02-01-2022)
 =====
 - Added `read_stream_available_frames` and `write_stream_available_frames` (#3).
 
