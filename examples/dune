@@ -1,3 +1,9 @@
 (executable
  (name noise)
+ (modules noise)
+ (libraries portaudio))
+
+(executable
+ (name list_devices)
+ (modules list_devices)
  (libraries portaudio))
