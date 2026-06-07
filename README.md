@@ -1,30 +1,21 @@
-ocaml-portaudio
-===============
+# ocaml-portaudio
 
-This package contains an OCaml interface for the portable audio I/O library.
+> [!WARNING]
+> This repository is read-only. All changes must be made in
+> [savonet/liquidsoap](https://github.com/savonet/liquidsoap) under
+> `src/modules/synced/portaudio/` and will be mirrored here automatically.
+
+OCaml bindings for [PortAudio](http://www.portaudio.com/), a portable audio I/O library.
 
 Please read the COPYING file before using this software.
 
-Prerequisites:
-==============
+## Prerequisites
 
-- ocaml
-- portaudio
-- findlib
-- dune >= 2.0
+- OCaml >= 4.14
+- portaudio (e.g. `apt install portaudio19-dev` or `brew install portaudio`)
+- dune >= 3.0
 
-Compilation:
-============
-
-```
-$ dune build
-```
-
-This should build both the native and the byte-code version of the
-extension library.
-
-Installation:
-=============
+## Installation
 
 Via `opam`:
 
@@ -32,11 +23,13 @@ Via `opam`:
 $ opam install portaudio
 ```
 
-Via `dune` (for developers):
+## Building from source
+
 ```
+$ dune build
 $ dune install
 ```
 
-This should install the library file (using ocamlfind) in the
-appropriate place.
+## Contact
 
+savonet-users@lists.sourceforge.net
