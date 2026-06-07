@@ -9,14 +9,13 @@ license: "LGPL-2.1"
 homepage: "https://github.com/savonet/ocaml-portaudio"
 bug-reports: "https://github.com/savonet/ocaml-portaudio/issues"
 depends: [
+  "dune" {>= "3.23"}
   "conf-portaudio"
   "conf-pkg-config"
-  "dune" {>= "2.8"}
   "dune-configurator"
   "odoc" {with-doc}
 ]
 build: [
-  ["dune" "subst"] {dev}
   [
     "dune"
     "build"
@@ -30,3 +29,4 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/savonet/ocaml-portaudio.git"
+x-maintenance-intent: ["(latest)"]
