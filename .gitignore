@@ -5,4 +5,3 @@ _build
 _tests
 .merlin
 *.install
-.*sw*

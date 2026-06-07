@@ -1,20 +1,17 @@
-ocaml-portaudio
-===============
+# ocaml-portaudio
 
 This package contains an OCaml interface for the portable audio I/O library.
 
 Please read the COPYING file before using this software.
 
-Prerequisites:
-==============
+# Prerequisites:
 
 - ocaml
 - portaudio
 - findlib
 - dune >= 2.0
 
-Compilation:
-============
+# Compilation:
 
 ```
 $ dune build
@@ -23,8 +20,7 @@ $ dune build
 This should build both the native and the byte-code version of the
 extension library.
 
-Installation:
-=============
+# Installation:
 
 Via `opam`:
 
@@ -33,10 +29,10 @@ $ opam install portaudio
 ```
 
 Via `dune` (for developers):
+
 ```
 $ dune install
 ```
 
 This should install the library file (using ocamlfind) in the
 appropriate place.
-

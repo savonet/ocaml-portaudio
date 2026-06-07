@@ -1,4 +1,4 @@
-(lang dune 2.8)
+(lang dune 3.23)
 (version 0.2.3)
 (name portaudio)
 (source (github savonet/ocaml-portaudio))
@@ -7,14 +7,15 @@
 (maintainers "The Savonet Team <savonet-users@lists.sourceforge.net>")
 
 (generate_opam_files true)
+(subst disabled)
 (use_standard_c_and_cxx_flags false)
 
 (package
  (name portaudio)
+ (allow_empty)
  (synopsis "Bindings for the portaudio library which provides high-level functions for using soundcards")
  (depends
   conf-portaudio
   conf-pkg-config
-  dune
   dune-configurator)
 )
