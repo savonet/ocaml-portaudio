@@ -298,9 +298,7 @@ CAMLprim value ocaml_pa_open_stream(value inparam, value outparam,
   PaStreamCallback *callb = NULL;
 
   st = malloc(sizeof(stream_t));
-  memset(st, 0, sizeof(*st));
-  st->tstart = 0;
-  st->tend = 0;
+  memset(st, 0, sizeof(stream_t));
 
   if (Is_block(inparam)) {
     ip = sp_val(Field(inparam, 0), Int_val(interleaved));
